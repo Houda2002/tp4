@@ -10,7 +10,7 @@ agent any
 stages {
 stage('Cloning Git') {
 steps {
-git 'https://github.com/Houda2002/tp4'
+git 'https://github.com/Houda2002/tp4.git'
 }
 }
 stage('Building image') {
