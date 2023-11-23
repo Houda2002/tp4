@@ -1,3 +1,5 @@
+
+
 pipeline {
 environment {
 registry = "houda9999/tp4"
@@ -8,7 +10,7 @@ agent any
 stages {
 stage('Cloning Git') {
 steps {
-git 'https://github.com/Houda2002/tp4'
+git 'https://github.com/Houda2002/tp4D'
 }
 }
 stage('Building image') {
@@ -17,12 +19,10 @@ script {
 dockerImage = docker.build registry + ":$BUILD_NUMBER"
 }
 }
-
 }
 stage('Test image') {
 steps{
 script {
-
 echo "Tests passed"
 }
 }
@@ -34,6 +34,11 @@ docker.withRegistry( '', registryCredential ) {
 dockerImage.push()
 }
 }
+}
+}
+stage('Deploy image') {
+steps{
+bat "docker run -d $registry:$BUILD_NUMBER"
 }
 }
 }
